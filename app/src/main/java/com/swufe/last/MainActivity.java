@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
         for (int i = 0; i < count; i++) {
             data[i] = sp.getString("" + i, "");
             Log.i(TAG, "onCreate:data:" + data[i].toString());
+
         }
         Log.i(TAG, "onCreate:updateRate=" + updateTime);
         SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");//设置日期格式
