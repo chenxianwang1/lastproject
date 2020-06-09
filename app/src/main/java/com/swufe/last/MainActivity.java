@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
         school = (EditText) findViewById(R.id.school);
         result = (ListView) findViewById(R.id.result);
 
+
         Thread t = new Thread(this);
         t.start();
 
