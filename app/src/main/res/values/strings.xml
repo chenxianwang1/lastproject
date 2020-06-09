@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">last</string>
-    <string name="school_label1">input the school</string>
+    <string name="school_label1">input the name of school</string>
+    <string name="menu_memorial">memorial</string>
 </resources>

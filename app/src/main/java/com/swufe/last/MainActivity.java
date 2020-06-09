@@ -13,6 +13,8 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -62,12 +64,10 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
         SharedPreferences sp = getSharedPreferences("mySwufeData", Activity.MODE_PRIVATE);
         updateTime = sp.getString("updateTime", "1970.01.01");//获取上次更新的时间
         int count = sp.getInt("recordCount", 0);//获取公告数
-
         data = new String[count];
         for (int i = 0; i < count; i++) {
             data[i] = sp.getString("" + i, "");
             Log.i(TAG, "onCreate:data:" + data[i].toString());
-
         }
         Log.i(TAG, "onCreate:updateRate=" + updateTime);
         SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");//设置日期格式
@@ -152,17 +152,26 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
                     result.setOnItemClickListener(MainActivity.this);
 
                 } else {
-
                     Toast.makeText(MainActivity.this, "Sorry!No information containing the keyword ", Toast.LENGTH_SHORT).show();
-
                 }
-
             }
-
         });
-
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.memorial,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.menu_set){
+            Intent config = new Intent(this,memorialActivity.class);
+            startActivity(config);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void run() {
@@ -172,23 +181,19 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         //获取网络数据，放入 List 带回到主线程中
         Document doc = null;
         Vector<String> list = new Vector<String>();
         try {
             doc = Jsoup.connect("http://www.chinakaoyan.com/info/list/ClassID/22/pagenum/1.shtml").get();
             Log.i(TAG, "run:" + doc.title());
-            //获取 a 中的数据
+            //获取网络中的数据
             int count = 0;
             Elements tds = doc.getElementsByTag("li");
             Log.i(TAG, "run:" + doc.title());
 
             for (int i = 0; i < tds.size(); i += 8) {
                 Element td1 = tds.get(i);
-                //Element td2 = tds.get(i+5);
-                //String str1 = td1.text();
-                //String val = td2.text();
                 list.add(count, td1.text() + "#http://www.chinakaoyan.com/info/list/ClassID/22/pagenum/1.shtml" + (td1.attr("href")));
                 Log.i(TAG, "run:" + list.get(count));
                 count++;
@@ -210,14 +215,11 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
         {
             HashMap<String, String> map = (HashMap<String, String>) result.getItemAtPosition(position);
             String site = map.get("ItemDetail");
-
             Intent intent = new Intent();
             intent.setData(Uri.parse(site));
             intent.setAction(Intent.ACTION_VIEW);
             this.startActivity(intent);
-
         }
-
 
     }
 
