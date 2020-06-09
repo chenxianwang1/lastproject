@@ -54,14 +54,11 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         school = (EditText) findViewById(R.id.school);
         result = (ListView) findViewById(R.id.result);
 
-
         Thread t = new Thread(this);
         t.start();
-
 
         SharedPreferences sp = getSharedPreferences("mySwufeData", Activity.MODE_PRIVATE);
         updateTime = sp.getString("updateTime", "1970.01.01");//获取上次更新的时间
