@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
         updateTime = sp.getString("updateTime", "1970.01.01");//获取上次更新的时间
         int count = sp.getInt("recordCount", 0);//获取公告数
         data = new String[count];
+
+
         for (int i = 0; i < count; i++) {
             data[i] = sp.getString("" + i, "");
             Log.i(TAG, "onCreate:data:" + data[i].toString());
