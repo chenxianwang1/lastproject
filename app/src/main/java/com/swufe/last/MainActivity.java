@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         school = (EditText) findViewById(R.id.school);
         result = (ListView) findViewById(R.id.result);
 
