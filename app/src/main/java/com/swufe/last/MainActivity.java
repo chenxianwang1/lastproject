@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
     private boolean flag = true;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
