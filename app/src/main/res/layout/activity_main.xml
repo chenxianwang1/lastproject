@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    style="@style/InputBoxStyle"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
 
     <TextView
         android:layout_width="match_parent"
@@ -15,24 +15,22 @@
         android:text="@string/information_label"
         android:textSize="40sp"></TextView>
 
-
     <EditText
         android:id="@+id/school"
-        android:inputType="text"
-        android:gravity="center"
-        android:background="@color/border_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:layout_marginBottom="35sp"
+        android:background="@color/border_color"
+        android:gravity="center"
         android:hint="@string/school_label1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></EditText>
+        android:inputType="text"></EditText>
 
     <ListView
         android:id="@+id/result"
-        android:gravity="center"
-        android:layout_marginTop="35sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
-
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35sp"></ListView>
 </LinearLayout>
+
+

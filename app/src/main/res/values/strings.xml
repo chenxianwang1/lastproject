@@ -2,5 +2,9 @@
     <string name="app_name">last</string>
     <string name="school_label1">input the name of school</string>
     <string name="menu_memorial">memorial</string>
+    <string name="menu_book">book</string>
     <string name="information_label">Information Service</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

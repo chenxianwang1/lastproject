@@ -2,6 +2,8 @@ package com.swufe.last;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,8 +21,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.jsoup.Jsoup;
@@ -47,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
     private SimpleAdapter listItemAdapter;
     private String updateTime;
     private boolean flag = true;
-
-
 
 
     @Override
@@ -171,6 +173,9 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.menu_set){
             Intent config = new Intent(this,memorialActivity.class);
+            startActivity(config);
+        }else if(item.getItemId()==R.id.menu_set2){
+            Intent config = new Intent(this,BookActivity.class);
             startActivity(config);
         }
         return super.onOptionsItemSelected(item);
