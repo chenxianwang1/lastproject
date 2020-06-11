@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
         Thread t = new Thread(this);
         t.start();
 
-        SharedPreferences sp = getSharedPreferences("mySwufeData", Activity.MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences("kaoyanData", Activity.MODE_PRIVATE);
         updateTime = sp.getString("updateTime", "1970.01.01");//获取上次更新的时间
         int count = sp.getInt("recordCount", 0);//获取公告数
         data = new String[count];
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
 
                 if (msg.what == 5) {
                     Vector<String> data_list = (Vector<String>) msg.obj;
-                    SharedPreferences sp = getSharedPreferences("mySwufeData", Activity.MODE_PRIVATE);
+                    SharedPreferences sp = getSharedPreferences("kaoyanData", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     data = new String[data_list.size()];
                     for (int m = 0; m < data_list.size(); m++) {
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
                     Log.i(TAG, "onActivityResult:handlerMessage:committing of rate finished");
 
 
-                    Toast.makeText(MainActivity.this, "Data has updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "数据已经更新", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
                     result.setOnItemClickListener(MainActivity.this);
 
                 } else {
-                    Toast.makeText(MainActivity.this, "Sorry!No information containing the keyword ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "请输入正确的关键词 ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -193,16 +193,16 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
         Document doc = null;
         Vector<String> list = new Vector<String>();
         try {
-            doc = Jsoup.connect("http://www.chinakaoyan.com/info/list/ClassID/22/pagenum/1.shtml").get();
+            doc = Jsoup.connect("https://yz.chsi.com.cn/kyzx/zcdh/").get();
             Log.i(TAG, "run:" + doc.title());
             //获取网络中的数据
             int count = 0;
             Elements tds = doc.getElementsByTag("li");
             Log.i(TAG, "run:" + doc.title());
 
-            for (int i = 0; i < tds.size(); i += 8) {
+            for (int i = 0; i < tds.size(); i +=1) {
                 Element td1 = tds.get(i);
-                list.add(count, td1.text() + "#http://www.chinakaoyan.com/info/list/ClassID/22/pagenum/1.shtml" + (td1.attr("href")));
+                list.add(count, td1.text() + "#https://yz.chsi.com.cn/kyzx/zcdh/" + (td1.attr("href")));
                 Log.i(TAG, "run:" + list.get(count));
                 count++;
             }
