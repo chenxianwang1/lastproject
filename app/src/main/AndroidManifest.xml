@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BookActivity"></activity>
+        <activity android:name=".MyListActivity"></activity>
+        <activity android:name=".BookActivity" />
         <activity android:name=".memorialActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

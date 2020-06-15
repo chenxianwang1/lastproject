@@ -48,9 +48,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
     private Handler handler;
     private String data[];
     private final String TAG = "SchoolName";
-    private SimpleAdapter listItemAdapter;
-    private String updateTime;
-    private boolean flag = true;
+    private SimpleAdapter listAdapter;
 
 
     @Override
@@ -65,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
         t.start();
 
         SharedPreferences sp = getSharedPreferences("kaoyanData", Activity.MODE_PRIVATE);
-        updateTime = sp.getString("updateTime", "1970.01.01");//获取上次更新的时间
         int count = sp.getInt("recordCount", 0);//获取公告数
         data = new String[count];
 
@@ -74,30 +71,11 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
             data[i] = sp.getString("" + i, "");
             Log.i(TAG, "onCreate:data:" + data[i].toString());
         }
-        Log.i(TAG, "onCreate:updateRate=" + updateTime);
-        SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");//设置日期格式
-        final String OSTime = df.format(new Date());//获取系统当前时间
-        Log.i(TAG, "onCreate:OSTime=" + OSTime);
-        //检查当周是否需要更新，若需要更新，则更新 flag 为 false
-        try {
-            Date update = df.parse(updateTime);
-            Calendar rightNow = Calendar.getInstance();
-            ;
-            rightNow.setTime(update);
-            for (int n = 0; n < 7; n++) {
-                if (df.format(rightNow.getTime()).equals(OSTime)) {
-                    flag = false;
-                }
-                rightNow.add(Calendar.DAY_OF_YEAR, 1);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
 
         handler = new Handler() {
 
-            @Override
+
+
 
             public void handleMessage(@NonNull Message msg) {
 
@@ -111,10 +89,8 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
                         editor.putString("" + m, data_list.get(m));
                     }
                     editor.putInt("recordCount", data_list.size());
-                    editor.putString("updateTime", OSTime);
                     editor.commit();
 
-                    Log.i(TAG, "onActivityResult:handlerMessage:updateTime=" + OSTime);
                     Log.i(TAG, "onActivityResult:handlerMessage:committing of rate finished");
 
 
@@ -148,12 +124,12 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
                     }
                 }
                 if (flag == 1) {
-                    listItemAdapter = new SimpleAdapter(MainActivity.this, dataList,//listItems 数据簿
-                            R.layout.list_item,//listItem 的 XML 布局实现
+                    listAdapter = new SimpleAdapter(MainActivity.this, dataList,
+                            R.layout.list_item,
                             new String[]{"ItemTitle", "ItemDetail"},
                             new int[]{R.id.itemTitle, R.id.itemDetail}
                     );
-                    result.setAdapter(listItemAdapter);
+                    result.setAdapter(listAdapter);
                     result.setOnItemClickListener(MainActivity.this);
 
                 } else {
@@ -209,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, Adapter
 
         } catch (IOException ex) {
             ex.printStackTrace();
-            Log.i(TAG, "run:请检查网络，如果网络没问题则说明网页已改变，那么请修改解析网页源代码 ");
+            Log.i(TAG, "run:请检查网络 ");
         }
         Message msg = handler.obtainMessage(7);
         msg.what = 5;

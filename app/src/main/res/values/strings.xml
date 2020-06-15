@@ -9,5 +9,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Text_label" translatable="false">memorial</string>
     <string name="input_hint">input the information</string>
+    <string name="title_set">title</string>
+    <string name="btn_set">btn_label</string>
+    <string name="btn_research">look</string>
 
 </resources>

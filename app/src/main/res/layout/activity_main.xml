@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:layout_marginBottom="35sp"
-        android:background="@color/border_color"
         android:gravity="center"
         android:hint="@string/school_label1"
         android:inputType="text"></EditText>
